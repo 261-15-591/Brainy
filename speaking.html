@@ -1,9 +1,0 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Brainy: AI IELTS Prep - Speaking</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="theme.css"></head><body data-page="speaking" data-tabs><main class="app">
-<div class="top"><button class="back" data-go="home.html" aria-label="Back">‹</button>Speaking AI</div>
-<div class="bars" id="bars" aria-hidden="true"></div>
-<p style="text-align:center;font-weight:600;margin:10px 0 0">Describe your hometown.</p>
-<button class="mic" id="mic" aria-label="Start recording">🎙️</button>
-<p style="text-align:center;margin:0 0 24px">Recording <b id="tm">0:00</b></p>
-<button class="btn green" data-go="result.html">Finish and get AI feedback</button>
-</main><script src="link.js"></script><script>var b=document.getElementById("bars");for(var k=0;k<36;k++){var e=document.createElement("i");e.style.animationDelay=(k%9)*0.1+"s";b.appendChild(e)}
-var s=0,id,m=document.getElementById("mic");m.onclick=function(){if(id){clearInterval(id);id=0;b.classList.remove("live");m.classList.remove("rec");return}b.classList.add("live");m.classList.add("rec");id=setInterval(function(){s++;document.getElementById("tm").textContent=Math.floor(s/60)+":"+("0"+s%60).slice(-2)},1000)}</script></body></html>
