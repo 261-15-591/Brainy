@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brainy: AI IELTS Prep — Intro Splash Screen</title>
+  <!-- Load Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Load Google Font: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Base Typography & Theme Tokens */
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #F4F5F2;
+      color: #0B1D3A;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    .brand-heading {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      letter-spacing: -0.03em;
+    }
+
+    /* Original Soft Pastel Sky-Blue Palette from Option 13 */
+    .splash-canvas {
+      background: linear-gradient(180deg, #D6ECFF 0%, #DCF0FF 55%, #D5ECFF 100%);
+    }
+
+    /* Ambient Floating Animations for Surrounding Doodles */
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-7px) rotate(2deg); }
+    }
+
+    @keyframes floatReverse {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(6px) rotate(-2deg); }
+    }
+
+    @keyframes pulseStar {
+      0%, 100% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 6px rgba(249, 168, 37, 0.45)); }
+      50% { transform: scale(1.12) rotate(6deg); filter: drop-shadow(0 0 12px rgba(249, 168, 37, 0.75)); }
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.9; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(0.82); }
+    }
+
+    @keyframes gentleBreathe {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
+    .animate-float-1 { animation: floatSlow 5.2s ease-in-out infinite; }
+    .animate-float-2 { animation: floatReverse 6.0s ease-in-out infinite; }
+    .animate-float-3 { animation: floatSlow 5.8s ease-in-out 0.8s infinite; }
+    .animate-float-4 { animation: floatReverse 5.4s ease-in-out 1.2s infinite; }
+    .animate-star-pulse {
+      transform-origin: 215px 62px;
+      animation: pulseStar 3.2s ease-in-out infinite;
+    }
+    .animate-twinkle { animation: twinkle 2.8s ease-in-out infinite; }
+    .animate-breathe { animation: gentleBreathe 4.5s ease-in-out infinite; }
+
+    /* Mobile Bezel Styling */
+    .phone-frame {
+      box-shadow: 
+        0 25px 60px -15px rgba(11, 29, 58, 0.16),
+        0 0 0 11px #FFFFFF,
+        0 0 0 13px #E2E8F0;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Fullscreen Mode Override */
+    .fullscreen-mode .phone-frame {
+      width: 100vw !important;
+      height: 100vh !important;
+      max-width: 100vw !important;
+      max-height: 100vh !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+    }
+    .fullscreen-mode .phone-notch,
+    .fullscreen-mode .phone-home-bar {
+      display: none !important;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-between py-4 px-3 sm:py-6">
+
+  <!-- Top Floating Control Bar (Studio Controls) -->
+  <header id="studioControls" class="w-full max-w-xl flex flex-wrap items-center justify-between gap-2 bg-white/90 backdrop-blur-md border border-slate-200/80 rounded-2xl px-4 py-2.5 shadow-sm z-30 mb-3">
+    <div class="flex items-center gap-2.5">
+      <span class="w-2.5 h-2.5 rounded-full bg-sky-500 animate-pulse"></span>
+      <span class="text-xs sm:text-sm font-semibold text-slate-800">Option 13 Preview</span>
+      <span class="hidden sm:inline-block text-xs text-slate-400 font-mono">#D8EEFF</span>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <!-- View Toggle Button -->
+      <button id="toggleViewBtn" type="button" class="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition cursor-pointer">
+        <svg id="viewIcon" class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+        </svg>
+        <span id="viewBtnLabel">Full Screen</span>
+      </button>
+
+      <!-- Simulate Transition Button -->
+      <button id="replaySplashBtn" type="button" class="inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-1.5 rounded-xl bg-[#0B1D3A] hover:bg-[#163363] text-white shadow-sm transition cursor-pointer">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>Test Intro Flow</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Stage Container -->
+  <main id="stageContainer" class="flex-1 flex items-center justify-center w-full">
+    
+    <!-- Mobile Frame Wrapper -->
+    <div id="phoneFrame" class="phone-frame relative w-[360px] sm:w-[385px] h-[750px] sm:h-[790px] max-h-[84vh] rounded-[46px] overflow-hidden splash-canvas select-none flex flex-col justify-between">
+      
+      <!-- Top iOS-style Notch & Status Bar -->
+      <div class="phone-notch relative w-full h-9 flex items-center justify-between px-7 pt-2 z-20 text-[#0B1D3A]/80 text-[11px] font-semibold">
+        <span>9:41</span>
+        <!-- Center Hardware Notch -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-36 h-6 bg-white rounded-b-2xl flex items-center justify-center gap-2 shadow-xs">
+          <span class="w-10 h-1 rounded-full bg-slate-200"></span>
+          <span class="w-2 h-2 rounded-full bg-slate-200"></span>
+        </div>
+        <!-- Signal & Battery Icons -->
+        <div class="flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M2 20h20V4L2 20z" opacity="0.25"/><path d="M2 20h14V10L2 20z"/></svg>
+          <svg class="w-4 h-3.5" fill="currentColor" viewBox="0 0 24 24"><rect x="2" y="6" width="18" height="12" rx="3" stroke="currentColor" stroke-width="2" fill="none"/><rect x="4.5" y="8.5" width="12" height="7" rx="1.5"/><path d="M21 10v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+      </div>
+
+      <!-- ========================================================= -->
+      <!-- SPLASH SCREEN CONTENT LAYER (OPTION 13 EXACT LAYOUT)      -->
+      <!-- ========================================================= -->
+      <div id="splashScreenLayer" class="relative flex-1 w-full h-full flex flex-col items-center justify-center px-6 transition-all duration-700">
+
+        <!-- TOP-LEFT DOODLE: Open Book with Coral-Orange Cover & Lined Pages -->
+        <div class="absolute top-[5%] left-[5%] w-28 sm:w-32 animate-float-1 pointer-events-none">
+          <svg viewBox="0 0 140 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g transform="rotate(-18 70 55)">
+              <!-- Coral Outer Cover -->
+              <path d="M16 32 C38 26, 56 30, 70 38 C84 30, 102 26, 124 32 L120 86 C100 80, 82 84, 70 91 C58 84, 40 80, 20 86 Z" fill="#D97356" stroke="#B6563B" stroke-width="2" stroke-linejoin="round"/>
+              <!-- Cream/Blue Page Thickness -->
+              <path d="M20 29 C40 23, 57 27, 70 35 C83 27, 100 23, 120 29 L117 81 C98 75, 82 79, 70 86 C58 79, 42 75, 23 81 Z" fill="#E3EEF8" stroke="#9DB5CC" stroke-width="1.5"/>
+              <!-- Top White Pages -->
+              <path d="M23 25 C42 19, 58 24, 70 32 C82 24, 98 19, 117 25 L114 76 C96 70, 81 74, 70 81 C59 74, 44 70, 26 76 Z" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
+              <!-- Center Spine Crease -->
+              <line x1="70" y1="32" x2="70" y2="81" stroke="#94A3B8" stroke-width="1.8"/>
+              <!-- Left Page Text Lines -->
+              <line x1="33" y1="35" x2="60" y2="39" stroke="#94A3B8" stroke-width="2" stroke-linecap="round"/>
+              <line x1="32" y1="43" x2="60" y2="47" stroke="#94A3B8" stroke-width="2" stroke-linecap="round"/>
+              <line x1="31" y1="51" x2="55" y2="54" stroke="#94A3B8" stroke-width="2" stroke-linecap="round"/>
+              <line x1="30" y1="59" x2="59" y2="63" stroke="#94A3B8" stroke-width="2" stroke-linecap="round"/>
+              <!-- Right Page Diagram & Lines -->
+              <rect x="78" y="36" width="26" height="16" rx="2" fill="#BAE6FD" stroke="#7DD3FC" stroke-width="1.2"/>
+              <line x1="78" y1="58" x2="105" y2="54" stroke="#94A3B8" stroke-width="2" stroke-linecap="round"/>
+              <line x1="78" y1="65" x2="100" y2="62" stroke="#94A3B8" stroke-width="2" stroke-linecap="round"/>
+            </g>
+          </svg>
+        </div>
+
+        <!-- TOP-CENTER DOODLE: Small Ringed Planet/Globe + Cyan 4-Point Star -->
+        <div class="absolute top-[2%] left-[35%] w-24 animate-float-2 pointer-events-none">
+          <svg viewBox="0 0 110 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Ringed Teal/Blue Globe -->
+            <g transform="translate(26, 26)">
+              <circle cx="0" cy="0" r="14" fill="#4B8BBE" stroke="#2B5B84" stroke-width="1.5"/>
+              <!-- Continents -->
+              <path d="M-6 -8 C-2 -6, 1 -2, -3 3 C-6 6, -11 2, -9 -4 Z" fill="#52B788"/>
+              <path d="M4 -5 C9 -4, 11 2, 7 7 C4 9, 2 4, 4 -5 Z" fill="#52B788"/>
+              <!-- Orbit Ring -->
+              <ellipse cx="0" cy="0" rx="21" ry="6.5" transform="rotate(24)" stroke="#8B7EC8" stroke-width="2" fill="none"/>
+              <circle cx="-17" cy="-8" r="2.2" fill="#FBBF24"/>
+            </g>
+            <!-- Cyan 4-Point Sparkle Star -->
+            <path d="M84 14 L87 22 L95 25 L87 28 L84 36 L81 28 L73 25 L81 22 Z" fill="#38BDF8" stroke="#0284C7" stroke-width="1.2" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <!-- TOP-RIGHT DOODLE: Stack of 4 Colorful Books + Stars -->
+        <div class="absolute top-[3%] right-[4%] w-28 sm:w-32 animate-float-3 pointer-events-none">
+          <svg viewBox="0 0 135 115" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Small Floating Stars Above Stack -->
+            <path d="M45 14 L47.5 19.5 L53.5 20.2 L49 24.2 L50.2 30 L45 27 L39.8 30 L41 24.2 L36.5 20.2 L42.5 19.5 Z" fill="#C4B5FD" stroke="#8B5CF6" stroke-width="1.2"/>
+            <path d="M98 12 L100.5 17.5 L106.5 18.2 L102 22.2 L103.2 28 L98 25 L92.8 28 L94 22.2 L89.5 18.2 L95.5 17.5 Z" fill="#FCD34D" stroke="#D97706" stroke-width="1.2"/>
+            <!-- Tiny 4-point sparkles -->
+            <path d="M24 38 L26 43 L31 45 L26 47 L24 52 L22 47 L17 45 L22 43 Z" fill="#FBBF24"/>
+            <path d="M114 48 L116 53 L121 55 L116 57 L114 62 L112 57 L107 55 L112 53 Z" fill="#FB923C"/>
+
+            <!-- Book 1 (Top - Periwinkle Blue) -->
+            <g transform="rotate(4 68 42)">
+              <rect x="34" y="34" width="68" height="13" rx="6" fill="#93C5FD" stroke="#3B82F6" stroke-width="1.5"/>
+              <line x1="42" y1="40.5" x2="94" y2="40.5" stroke="#EFF6FF" stroke-width="2" stroke-linecap="round"/>
+            </g>
+            <!-- Book 2 (Second - Teal) -->
+            <g transform="rotate(3 68 56)">
+              <rect x="28" y="48" width="76" height="14" rx="4" fill="#38BDF8" stroke="#0284C7" stroke-width="1.5"/>
+              <rect x="78" y="51" width="22" height="8" rx="2" fill="#F8FAFC"/>
+            </g>
+            <!-- Book 3 (Third - Soft Mint/Cream) -->
+            <g transform="rotate(5 68 70)">
+              <rect x="32" y="63" width="70" height="12" rx="5" fill="#A7F3D0" stroke="#059669" stroke-width="1.5"/>
+              <line x1="40" y1="69" x2="92" y2="69" stroke="#ECFDF5" stroke-width="2" stroke-linecap="round"/>
+            </g>
+            <!-- Book 4 (Bottom - Coral-Red) -->
+            <g transform="rotate(4 68 84)">
+              <rect x="24" y="76" width="80" height="15" rx="5" fill="#E07A5F" stroke="#B6563B" stroke-width="1.5"/>
+              <rect x="29" y="79" width="58" height="9" rx="3" fill="#FEF3C7"/>
+            </g>
+          </svg>
+        </div>
+
+        <!-- MIDDLE-LEFT DOODLES: Teal Leaf/Feather & Purple Sparkle -->
+        <div class="absolute top-[33%] left-[6%] w-12 animate-twinkle pointer-events-none">
+          <svg viewBox="0 0 50 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 12 C22 22, 20 34, 14 42 C12 31, 13 21, 16 12 Z" fill="#34D399" stroke="#059669" stroke-width="1.3"/>
+            <path d="M18 50 L20 55 L25 57 L20 59 L18 64 L16 59 L11 57 L16 55 Z" fill="#A78BFA" stroke="#7C3AED" stroke-width="1.1"/>
+          </svg>
+        </div>
+
+        <!-- MIDDLE-RIGHT DOODLES: Small Pencil, Green Spark & Red Dot -->
+        <div class="absolute top-[25%] right-[5%] w-16 animate-float-4 pointer-events-none">
+          <svg viewBox="0 0 70 95" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Small Angled Pencil -->
+            <g transform="translate(34, 24) rotate(38)">
+              <rect x="-14" y="-4" width="22" height="8" rx="2" fill="#818CF8" stroke="#4F46E5" stroke-width="1.3"/>
+              <polygon points="8,-4 16,0 8,4" fill="#FDE68A" stroke="#D97706" stroke-width="1.2"/>
+              <polygon points="13,-1.5 16,0 13,1.5" fill="#1E293B"/>
+              <rect x="-18" y="-4" width="5" height="8" rx="1.5" fill="#F472B6"/>
+            </g>
+            <!-- Tiny Mint Star -->
+            <path d="M52 44 L54 48 L58 50 L54 52 L52 56 L50 52 L46 50 L50 48 Z" fill="#34D399"/>
+            <!-- Small Red Accent Dot -->
+            <circle cx="34" cy="76" r="3.8" fill="#EF4444"/>
+          </svg>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- CENTERPIECE BRAND LOGO & TYPOGRAPHY                       -->
+        <!-- ========================================================= -->
+        <div class="relative z-10 flex flex-col items-center text-center -mt-4 animate-breathe">
+          
+          <!-- Brain AI Logo SVG -->
+          <div class="w-48 sm:w-52 h-40 sm:h-44 flex items-center justify-center">
+            <svg viewBox="0 0 280 220" class="w-full h-full drop-shadow-md" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <!-- Deep Navy to Rich Royal Blue Gradient -->
+                <linearGradient id="brainNavyGrad" x1="45" y1="40" x2="215" y2="185" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#17468A" />
+                  <stop offset="50%" stop-color="#0E3063" />
+                  <stop offset="100%" stop-color="#081C3D" />
+                </linearGradient>
+
+                <!-- Warm Golden-Orange Star Gradient -->
+                <linearGradient id="goldStarGrad" x1="185" y1="32" x2="245" y2="92" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#FFD54F" />
+                  <stop offset="55%" stop-color="#FFA726" />
+                  <stop offset="100%" stop-color="#F57C00" />
+                </linearGradient>
+
+                <!-- Glowing Cyan Text Gradient -->
+                <linearGradient id="cyanTextGrad" x1="115" y1="85" x2="165" y2="135" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#67E8F9" />
+                  <stop offset="100%" stop-color="#22D3EE" />
+                </linearGradient>
+              </defs>
+
+              <!-- Brain Silhouette & Stem (Side Profile Facing Left) -->
+              <path d="
+                M 118 46
+                C 104 42, 87 48, 81 61
+                C 65 62, 52 74, 53 90
+                C 44 98, 43 114, 52 124
+                C 50 139, 62 152, 78 151
+                C 87 161, 104 163, 118 156
+                C 127 162, 140 162, 149 156
+                L 155 178
+                C 157 185, 166 188, 173 185
+                C 179 182, 181 174, 178 167
+                L 171 151
+                C 188 152, 204 143, 210 128
+                C 223 121, 229 105, 223 91
+                C 226 75, 215 60, 199 57
+                C 191 44, 173 39, 158 45
+                C 146 38, 130 39, 118 46 Z"
+                fill="url(#brainNavyGrad)"
+              />
+
+              <!-- Subtle Neural Fold Lines Inside Brain -->
+              <path d="M82 64 C90 70, 96 68, 102 62" stroke="#1E56A0" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+              <path d="M62 122 C72 118, 80 123, 86 130" stroke="#1E56A0" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+              <path d="M150 148 C158 140, 168 140, 176 146" stroke="#1E56A0" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+
+              <!-- Internal Glowing Cyan 4-Point Sparkles -->
+              <!-- Left Sparkle -->
+              <path d="M84 92 L87 101 L96 104 L87 107 L84 116 L81 107 L72 104 L81 101 Z" fill="#67E8F9"/>
+              <!-- Bottom Center Sparkle -->
+              <path d="M142 128 L144.5 135 L151.5 137.5 L144.5 140 L142 147 L139.5 140 L132.5 137.5 L139.5 135 Z" fill="#A5F3FC"/>
+              <!-- Tiny Glowing Dots Inside Brain -->
+              <circle cx="105" cy="76" r="2.2" fill="#BAE6FD"/>
+              <circle cx="176" cy="114" r="2" fill="#67E8F9"/>
+              <circle cx="112" cy="136" r="1.8" fill="#7DD3FC"/>
+
+              <!-- Bold Cyan 'AI' Letters Centered in Brain -->
+              <text x="136" y="117" text-anchor="middle" fill="url(#cyanTextGrad)" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="44" letter-spacing="-1">AI</text>
+
+              <!-- Vibrant Golden-Orange 4-Point Star Overlapping Top-Right Lobe -->
+              <g class="animate-star-pulse">
+                <path d="
+                  M 215 26
+                  C 218 46, 226 54, 248 58
+                  C 226 62, 218 70, 215 92
+                  C 212 70, 204 62, 182 58
+                  C 204 54, 212 46, 215 26 Z"
+                  fill="url(#goldStarGrad)"
+                />
+                <!-- Subtle Inner Highlight on Gold Star -->
+                <path d="M215 36 C217 49, 222 54, 236 58 C222 61, 217 66, 215 80 C213 66, 208 61, 194 58 C208 54, 213 49, 215 36 Z" fill="#FFF3E0" opacity="0.35"/>
+              </g>
+            </svg>
+          </div>
+
+          <!-- Brand Heading: Brainy -->
+          <h1 class="brand-heading text-[44px] sm:text-[48px] font-extrabold text-[#0B1D3A] leading-none mt-1">
+            Brainy
+          </h1>
+
+          <!-- Subtitle: AI IELTS Prep -->
+          <p class="text-[19px] sm:text-[21px] font-medium text-[#1E3354] tracking-tight mt-2">
+            AI IELTS Prep
+          </p>
+
+          <!-- Subtle Interactive Loading / Tap Indicator -->
+          <div id="loadingIndicator" class="mt-7 flex flex-col items-center gap-2 opacity-90">
+            <div class="w-28 h-1.5 bg-[#0B1D3A]/10 rounded-full overflow-hidden">
+              <div id="splashProgressBar" class="h-full bg-gradient-to-r from-[#0E3063] to-[#0284C7] rounded-full w-1/3 transition-all duration-500"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tiny Amber Sparkle Above Bottom-Left Notebook -->
+        <div class="absolute bottom-[29%] left-[8%] w-6 animate-twinkle pointer-events-none">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M12 2 L14.5 9.5 L22 12 L14.5 14.5 L12 22 L9.5 14.5 L2 12 L9.5 9.5 Z" fill="#F59E0B" stroke="#B45309" stroke-width="1.2"/>
+          </svg>
+        </div>
+
+        <!-- BOTTOM-LEFT DOODLE: Closed Royal-Blue Hardcover Notebook + Red Ribbon -->
+        <div class="absolute bottom-[7%] left-[6%] w-24 sm:w-28 animate-float-2 pointer-events-none">
+          <svg viewBox="0 0 115 125" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g transform="rotate(-16 58 62)">
+              <!-- Back Cover Shadow -->
+              <rect x="26" y="20" width="64" height="84" rx="7" fill="#1E3A8A"/>
+              <!-- White Page Edges -->
+              <path d="M26 94 L88 94 L88 102 C88 104, 86 105, 83 105 L30 105 C27 105, 26 103, 26 100 Z" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.5"/>
+              <!-- Red Bookmark Ribbon Sticking Out Bottom -->
+              <path d="M44 101 L44 117 L50 113 L56 117 L56 101 Z" fill="#EF4444" stroke="#B91C1C" stroke-width="1.2" stroke-linejoin="round"/>
+              <!-- Front Royal-Blue Cover -->
+              <rect x="24" y="16" width="64" height="82" rx="6" fill="#4F7DF3" stroke="#254EDB" stroke-width="1.8"/>
+              <!-- Left Spine Highlight -->
+              <path d="M31 16 L31 98" stroke="#1D4ED8" stroke-width="2.5"/>
+              <!-- White Title Label Patch -->
+              <rect x="42" y="32" width="32" height="16" rx="3" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1.2"/>
+              <line x1="47" y1="38" x2="69" y2="38" stroke="#64748B" stroke-width="2" stroke-linecap="round"/>
+              <line x1="47" y1="43" x2="62" y2="43" stroke="#94A3B8" stroke-width="2" stroke-linecap="round"/>
+            </g>
+          </svg>
+        </div>
+
+        <!-- BOTTOM-CENTER DOODLE: Small Geometric Compass/Triangle & Mini Planet -->
+        <div class="absolute bottom-[3%] left-[34%] w-20 animate-float-3 pointer-events-none">
+          <svg viewBox="0 0 95 75" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Small Saturn-like Orange/Yellow Planet -->
+            <g transform="translate(22, 48)">
+              <circle cx="0" cy="0" r="9" fill="#FBBF24" stroke="#D97706" stroke-width="1.3"/>
+              <ellipse cx="0" cy="0" rx="15" ry="4.5" transform="rotate(-18)" stroke="#F87171" stroke-width="1.8" fill="none"/>
+            </g>
+            <!-- Translucent Cyan Geometric Triangle / Ruler -->
+            <g transform="translate(56, 30) rotate(14)">
+              <polygon points="0,-16 16,14 -16,14" fill="#7DD3FC" fill-opacity="0.65" stroke="#0284C7" stroke-width="1.5" stroke-linejoin="round"/>
+              <polygon points="0,-6 6,7 -6,7" fill="#D8EEFF"/>
+              <circle cx="0" cy="-16" r="2.2" fill="#38BDF8"/>
+              <circle cx="16" cy="14" r="2.2" fill="#38BDF8"/>
+            </g>
+          </svg>
+        </div>
+
+        <!-- BOTTOM-RIGHT DOODLE: Soft Coral-Pink Anatomical Brain + Orbiting Globe Trail -->
+        <div class="absolute bottom-[4%] right-[3%] w-32 sm:w-36 animate-float-1 pointer-events-none">
+          <svg viewBox="0 0 155 155" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Small Orbiting Globe & Dashed Arrow Trail Above Brain -->
+            <g transform="translate(116, 46)">
+              <!-- Dashed Curve & Tiny Green Arrow -->
+              <path d="M4 -32 C12 -22, 12 -12, 4 -4" stroke="#E07A5F" stroke-width="1.6" stroke-dasharray="3 3" fill="none"/>
+              <polygon points="4,-36 8,-29 0,-29" fill="#34D399"/>
+              <!-- Small Globe -->
+              <circle cx="0" cy="6" r="10" fill="#38BDF8" stroke="#0284C7" stroke-width="1.3"/>
+              <path d="M-4 1 C-1 2, 1 6, -3 10 C-6 11, -8 6, -4 1 Z" fill="#34D399"/>
+              <path d="M3 2 C7 3, 8 8, 4 11 Z" fill="#34D399"/>
+            </g>
+
+            <!-- Small Yellow Star on Top-Left of Pink Brain -->
+            <path d="M36 62 L39 68.5 L46 69.5 L41 74.5 L42.2 81.5 L36 78 L29.8 81.5 L31 74.5 L26 69.5 L33 68.5 Z" fill="#FDE047" stroke="#CA8A04" stroke-width="1.3" stroke-linejoin="round"/>
+
+            <!-- Coral-Pink Anatomical Brain Illustration -->
+            <g transform="translate(26, 70)">
+              <!-- Brainstem -->
+              <path d="M62 56 L68 74 C70 78, 76 78, 77 73 L73 54 Z" fill="#D98A82" stroke="#A65E56" stroke-width="1.5"/>
+              <!-- Cerebellum (Striped Lower Back Lobe) -->
+              <path d="M66 44 C82 44, 92 52, 88 61 C83 68, 69 66, 63 58 Z" fill="#C9736B" stroke="#9E524B" stroke-width="1.5"/>
+              <line x1="69" y1="51" x2="86" y2="52" stroke="#9E524B" stroke-width="1.2"/>
+              <line x1="68" y1="56" x2="85" y2="57" stroke="#9E524B" stroke-width="1.2"/>
+
+              <!-- Main Coral-Pink Cerebrum -->
+              <path d="
+                M 45 10
+                C 32 8, 19 14, 15 24
+                C 6 27, 3 38, 9 46
+                C 10 55, 20 61, 31 58
+                C 40 62, 53 60, 62 54
+                C 74 53, 86 46, 88 35
+                C 90 23, 80 13, 68 12
+                C 61 7, 52 7, 45 10 Z"
+                fill="#F2A69E" stroke="#B86B63" stroke-width="1.7" stroke-linejoin="round"
+              />
+              <!-- Anatomical Brain Gyri / Folds -->
+              <path d="M24 22 C31 20, 36 25, 34 31" stroke="#B86B63" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M44 16 C48 22, 45 29, 39 32" stroke="#B86B63" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M60 18 C57 25, 61 31, 68 31" stroke="#B86B63" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M18 40 C26 38, 32 42, 30 49" stroke="#B86B63" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M38 43 C45 40, 52 44, 50 51" stroke="#B86B63" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M58 39 C65 37, 72 40, 74 45" stroke="#B86B63" stroke-width="1.6" stroke-linecap="round"/>
+            </g>
+          </svg>
+        </div>
+
+      </div>
+
+      <!-- ========================================================= -->
+      <!-- SIMULATED NEXT SCREEN (WELCOME / ONBOARDING PREVIEW)      -->
+      <!-- ========================================================= -->
+      <div id="welcomeNextLayer" class="hidden relative flex-1 w-full h-full flex flex-col items-center justify-between px-6 py-8 text-center bg-gradient-to-b from-[#D8EEFF] to-white transition-all duration-500">
+        <div class="w-full flex justify-end">
+          <button id="backToSplashBtn" type="button" class="text-xs font-semibold text-[#1E3354] bg-white/80 hover:bg-white px-3 py-1.5 rounded-full shadow-xs cursor-pointer">
+            ← Replay Splash
+          </button>
+        </div>
+
+        <div class="flex flex-col items-center my-auto">
+          <div class="w-16 h-16 rounded-2xl bg-[#0E3063] flex items-center justify-center shadow-lg mb-5">
+            <span class="brand-heading text-2xl font-extrabold text-[#67E8F9]">AI</span>
+          </div>
+          <span class="inline-block text-xs font-semibold uppercase tracking-wider text-sky-700 bg-sky-100 px-3 py-1 rounded-full mb-3">
+            Transition Complete
+          </span>
+          <h2 class="brand-heading text-2xl font-extrabold text-[#0B1D3A] leading-snug">
+            Welcome to Brainy
+          </h2>
+          <p class="text-sm text-[#1E3354] mt-2 max-w-[260px] leading-relaxed">
+            Your splash screen smoothly transitions right into goal setting and IELTS practice.
+          </p>
+
+          <!-- Quick Band Target Selector Preview -->
+          <div class="w-full bg-white rounded-2xl p-4 shadow-sm border border-sky-100 mt-6">
+            <p class="text-xs font-semibold text-slate-500 mb-2.5">Select Target IELTS Band</p>
+            <div class="grid grid-cols-4 gap-2">
+              <button type="button" class="band-pill py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-sky-100 transition cursor-pointer">7.0</button>
+              <button type="button" class="band-pill py-2 rounded-xl text-xs font-bold bg-[#0E3063] text-white shadow-xs transition cursor-pointer">7.5</button>
+              <button type="button" class="band-pill py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-sky-100 transition cursor-pointer">8.0</button>
+              <button type="button" class="band-pill py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-sky-100 transition cursor-pointer">8.5</button>
+            </div>
+          </div>
+        </div>
+
+        <button id="resetFlowBtn" type="button" class="w-full py-3.5 rounded-2xl bg-[#0E3063] hover:bg-[#17468A] text-white font-semibold text-sm shadow-md transition cursor-pointer">
+          Back to Option 13 Splash Screen
+        </button>
+      </div>
+
+      <!-- Bottom iOS Home Indicator Bar -->
+      <div class="phone-home-bar w-full h-6 flex items-center justify-center pb-1.5 z-20">
+        <div class="w-32 h-1 bg-[#0B1D3A]/20 rounded-full"></div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Subtle Footer Hint -->
+  <footer class="text-center text-[11px] text-slate-500 mt-2">
+    Click <strong class="text-slate-700">Test Intro Flow</strong> to preview the splash-to-app transition or <strong class="text-slate-700">Full Screen</strong> to inspect responsive scaling.
+  </footer>
+
+  <!-- Interactive Logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleViewBtn = document.getElementById('toggleViewBtn');
+      const viewBtnLabel = document.getElementById('viewBtnLabel');
+      const replaySplashBtn = document.getElementById('replaySplashBtn');
+      const backToSplashBtn = document.getElementById('backToSplashBtn');
+      const resetFlowBtn = document.getElementById('resetFlowBtn');
+      const splashScreenLayer = document.getElementById('splashScreenLayer');
+      const welcomeNextLayer = document.getElementById('welcomeNextLayer');
+      const splashProgressBar = document.getElementById('splashProgressBar');
+      const bandPills = document.querySelectorAll('.band-pill');
+
+      let isFullscreen = false;
+      let transitionTimer = null;
+
+      // Toggle between Mobile Device Frame and Full-Screen Responsive View
+      toggleViewBtn.addEventListener('click', () => {
+        isFullscreen = !isFullscreen;
+        document.body.classList.toggle('fullscreen-mode', isFullscreen);
+        viewBtnLabel.textContent = isFullscreen ? 'Mobile Frame' : 'Full Screen';
+      });
+
+      // Function to reset back to Option 13 Splash Screen
+      function showSplashScreen() {
+        clearTimeout(transitionTimer);
+        welcomeNextLayer.classList.add('hidden');
+        splashScreenLayer.classList.remove('hidden', 'opacity-0', 'scale-95');
+        splashProgressBar.style.width = '35%';
+      }
+
+      // Function to simulate a real 2.2-second app launch transition
+      function runIntroFlow() {
+        showSplashScreen();
+        // Animate loading bar smoothly
+        setTimeout(() => {
+          splashProgressBar.style.width = '100%';
+        }, 120);
+
+        // Transition to the next screen after loading completes
+        transitionTimer = setTimeout(() => {
+          splashScreenLayer.classList.add('opacity-0', 'scale-95');
+          setTimeout(() => {
+            splashScreenLayer.classList.add('hidden');
+            welcomeNextLayer.classList.remove('hidden');
+          }, 350);
+        }, 1900);
+      }
+
+      // Interactive Band Target Pill Selection on Next Screen
+      bandPills.forEach((pill) => {
+        pill.addEventListener('click', () => {
+          bandPills.forEach((p) => {
+            p.classList.remove('bg-[#0E3063]', 'text-white', 'shadow-xs');
+            p.classList.add('bg-slate-100', 'text-slate-700');
+          });
+          pill.classList.remove('bg-slate-100', 'text-slate-700');
+          pill.classList.add('bg-[#0E3063]', 'text-white', 'shadow-xs');
+        });
+      });
+
+      replaySplashBtn.addEventListener('click', runIntroFlow);
+      backToSplashBtn.addEventListener('click', showSplashScreen);
+      resetFlowBtn.addEventListener('click', showSplashScreen);
+    });
+  </script>
+</body>
+</html>
