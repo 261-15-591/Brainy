@@ -71,10 +71,14 @@
     }
     .animate-twinkle { animation: twinkle 2.8s ease-in-out infinite; }
     .animate-breathe { animation: gentleBreathe 4.5s ease-in-out infinite; }
+    /* Smooth exit before navigating to the next page */
+    body { transition: opacity 0.45s ease; }
+    body.page-leaving { opacity: 0; }
+
     .animate-loading-bar { animation: loadingSweep 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
   </style>
 </head>
-<body class="relative w-screen h-screen overflow-hidden flex items-center justify-center select-none">
+<body data-page="splash" class="relative w-screen h-screen overflow-hidden flex items-center justify-center select-none">
 
   <!-- ========================================================= -->
   <!-- PERIMETER FLOATING STUDY DOODLES (EDGE-TO-EDGE)           -->
@@ -334,6 +338,17 @@
     </div>
 
   </main>
+
+  <!-- Fallback link if JavaScript is disabled -->
+  <noscript><meta http-equiv="refresh" content="3;url=2nd_page.html" /></noscript>
+
+  <script src="link.js"></script>
+  <script>
+    // Safety net: if link.js did not load, still go to the next page
+    setTimeout(function () {
+      if (!window.brainyLinkLoaded) { window.location.href = '2nd_page.html'; }
+    }, 3600);
+  </script>
 
 </body>
 </html>
