@@ -1,0 +1,8 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Brainy: AI IELTS Prep - Target band</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="theme.css"></head><body data-page="target" ><main class="app">
+<h1 style="text-align:center;margin-top:36px">What is your<br>Target Band Score?</h1>
+<p class="sub" style="text-align:center">We'll build your study plan around it.</p>
+<div class="card" style="margin:28px 0;display:flex;justify-content:center"><div class="ring" id="r" style="--p:83;width:150px;height:150px"><b id="big" style="width:116px;height:116px;font-size:38px">7.5</b></div></div>
+<div class="chips" id="bands" data-select style="justify-content:center;margin-bottom:32px"><span class="chip" tabindex="0">5.5</span><span class="chip" tabindex="0">6.5</span><span class="chip on" tabindex="0">7.5</span><span class="chip" tabindex="0">8</span><span class="chip" tabindex="0">9</span></div>
+<button class="btn green" id="go">Get Started</button>
+</main><script src="link.js"></script><script>var b=document.getElementById("bands"),v="7.5";b.addEventListener("click",function(e){var c=e.target.closest(".chip");if(!c)return;v=c.textContent;document.getElementById("big").textContent=v;document.getElementById("r").style.setProperty("--p",v/9*100)});
+document.getElementById("go").onclick=function(){try{localStorage.setItem("brainyTarget",v)}catch(_){}brainyGo("home.html")}</script></body></html>

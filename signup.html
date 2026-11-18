@@ -1,0 +1,15 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Brainy: AI IELTS Prep - Create account</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="theme.css"></head><body data-page="signup" ><main class="app">
+<button class="back" data-go="3rd_page.html" aria-label="Back to log in">‹</button>
+<h1 style="margin-top:28px">Create your account</h1>
+<p class="sub">Start your IELTS journey with an AI study plan.</p>
+<form id="f" novalidate>
+<label class="fl" for="n">Full name</label><input class="field" id="n" autocomplete="name" placeholder="Your name">
+<label class="fl" for="e">Email</label><input class="field" id="e" type="email" autocomplete="email" placeholder="you@example.com">
+<label class="fl" for="p">Password</label><input class="field" id="p" type="password" autocomplete="new-password" placeholder="At least 6 characters">
+<p class="msg" id="m" role="alert"></p>
+<button class="btn" type="submit">Create account</button>
+</form>
+<p style="text-align:center;margin-top:22px;font-size:15px">Already have an account? <a href="3rd_page.html" style="color:var(--teal);font-weight:600">Log in</a></p>
+</main><script src="link.js"></script><script>document.getElementById("f").onsubmit=function(x){x.preventDefault();var n=e1("n"),m=document.getElementById("m");function e1(i){return document.getElementById(i).value.trim()}
+if(!n)return m.textContent="Enter your name.";if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e1("e")))return m.textContent="Enter a valid email address.";if(e1("p").length<6)return m.textContent="Your password needs at least 6 characters.";
+try{localStorage.setItem("brainyName",n.split(" ")[0])}catch(_){}brainyGo("target.html")}</script></body></html>
