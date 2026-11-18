@@ -1,6 +1,8 @@
 /* link.js — page navigation for the Brainy app
    Edit the routes below to change where each page goes. */
 
+window.brainyLinkLoaded = true;
+
 const ROUTES = {
   splash:  { next: '2nd_page.html', delay: 3200 },  // index.html -> 2nd_page.html after 3.2s
   welcome: { next: null }                            // 2nd_page.html "Get Started" -> set e.g. '3rd_page.html'
