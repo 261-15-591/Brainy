@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brainy: AI IELTS Prep - Log in</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    /* Reset and Full-Viewport Setup */
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: #F4F5F0;
+      color: #182542;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-y: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Display Heading Font Matching Reference */
+    .display-title {
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      letter-spacing: -0.03em;
+      line-height: 1.08;
+    }
+
+    /* Subtle Entrance & Ambient Motion */
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    body { transition: opacity 0.45s ease; }
+    body.page-leaving { opacity: 0; }
+
+    .animate-enter {
+      animation: fadeSlideUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .animate-enter-delay-1 {
+      opacity: 0;
+      animation: fadeSlideUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.12s forwards;
+    }
+
+    .animate-enter-delay-2 {
+      opacity: 0;
+      animation: fadeSlideUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.22s forwards;
+    }
+
+    /* Primary Teal Pill Button Styling */
+    .cta-button {
+      background-color: #1D8A93;
+      transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+    }
+
+    .cta-button:hover {
+      background-color: #17747C;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px -6px rgba(29, 138, 147, 0.35);
+    }
+
+    .cta-button:active {
+      transform: translateY(0px) scale(0.99);
+    }
+  
+    body { display: flex; flex-direction: column; align-items: center; padding: 1.5rem; box-sizing: border-box; }
+    /* ---------- Login styles ---------- */
+        .login-wrap { margin: auto 0; width: 100%; max-width: 380px; }
+    .field-label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+    .field {
+      width: 100%; height: 52px; padding: 0 16px; border-radius: 16px;
+      background: #fff; border: 1.5px solid #D5D8D6; color: #182542;
+      font: 500 16px 'Inter', sans-serif; outline: none; -webkit-user-select: text; user-select: text;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    .field::placeholder { color: #8A93A0; }
+    .field:focus { border-color: #1D8A93; box-shadow: 0 0 0 4px rgba(29,138,147,.18); }
+    .field.has-error { border-color: #D64B3A; }
+    .text-link { color: #1D8A93; font-weight: 600; background: none; border: 0; cursor: pointer; }
+    .text-link:hover { text-decoration: underline; }
+    .text-link:focus-visible, .back-btn:focus-visible, .google-btn:focus-visible { outline: 3px solid rgba(29,138,147,.4); outline-offset: 2px; border-radius: 8px; }
+    .google-btn {
+      width: 100%; height: 52px; border-radius: 9999px; background: #fff;
+      border: 1.5px solid #D5D8D6; color: #182542; font: 600 16px 'Inter', sans-serif;
+      display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer;
+      transition: background-color .2s ease;
+    }
+    .google-btn:hover { background: #FAFAF7; }
+    .back-btn {
+      width: 40px; height: 40px; border-radius: 9999px; border: 1.5px solid #D5D8D6;
+      background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer;
+    }
+    .cta-button:disabled { opacity: .7; cursor: default; transform: none; box-shadow: none; }
+    @media (prefers-reduced-motion: reduce) { .animate-enter { animation: none; } }
+
+  </style>
+</head>
+<body data-page="login">
+
+    <div class="login-wrap animate-enter">
+
+      <button type="button" id="backBtn" class="back-btn" aria-label="Back to welcome screen">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#182542" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
+
+      <!-- Small mark echoing the welcome collage -->
+      <svg width="64" height="64" viewBox="0 0 64 64" class="mt-6" aria-hidden="true">
+        <circle cx="16" cy="16" r="16" fill="#182542"/>
+        <path d="M32 0 A32 32 0 0 1 64 32 L32 32 Z" fill="#EE7651"/>
+        <rect x="32" y="32" width="32" height="32" fill="#2BB673"/>
+        <path d="M0 64 A16 16 0 0 1 32 64 Z" fill="#1D8A93"/>
+      </svg>
+
+      <h1 class="display-title text-[32px] sm:text-[36px] font-extrabold mt-5">Welcome back</h1>
+      <p class="mt-2 text-[15px] text-[#2C3545]">Log in to continue your IELTS practice.</p>
+
+      <form id="loginForm" class="mt-7" novalidate>
+        <label class="field-label" for="email">Email</label>
+        <input class="field" id="email" type="email" autocomplete="email" placeholder="you@example.com" />
+
+        <div class="flex items-center justify-between mt-4 mb-[6px]">
+          <label class="field-label !mb-0" for="password">Password</label>
+          <button type="button" id="togglePw" class="text-link text-[14px]">Show</button>
+        </div>
+        <input class="field" id="password" type="password" autocomplete="current-password" placeholder="At least 6 characters" />
+
+        <div class="flex justify-end mt-3">
+          <button type="button" id="forgotBtn" class="text-link text-[14px]">Forgot password?</button>
+        </div>
+
+        <p id="loginMsg" role="alert" class="min-h-[22px] mt-3 text-[14px] font-medium text-center"></p>
+
+        <button id="loginBtn" type="submit" class="cta-button w-full h-[52px] sm:h-[56px] rounded-full text-white font-semibold text-[16px] sm:text-[17px] cursor-pointer focus:outline-none focus:ring-4 focus:ring-[#1D8A93]/30">
+          Log in
+        </button>
+      </form>
+
+      <div class="flex items-center gap-3 my-5 text-[13px] text-[#6B7480]">
+        <span class="flex-1 h-px bg-[#D5D8D6]"></span>or<span class="flex-1 h-px bg-[#D5D8D6]"></span>
+      </div>
+
+      <button type="button" id="googleBtn" class="google-btn">
+        <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 8 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.7-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 8 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.7-.4-3.9z"/></svg>
+        Continue with Google
+      </button>
+
+      <p class="mt-6 text-center text-[15px] text-[#2C3545]">
+        New to Brainy? <button type="button" id="signupBtn" class="text-link">Create an account</button>
+      </p>
+    </div>
+  
+  <script src="link.js"></script>
+  <script>
+    function $(id) { return document.getElementById(id); }
+    var msg = $('loginMsg');
+    function say(text, ok) {
+      msg.textContent = text;
+      msg.style.color = ok ? '#1B8A55' : '#D64B3A';
+    }
+
+    $('togglePw').addEventListener('click', function () {
+      var pw = $('password'), show = pw.type === 'password';
+      pw.type = show ? 'text' : 'password';
+      this.textContent = show ? 'Hide' : 'Show';
+    });
+
+    ['email', 'password'].forEach(function (id) {
+      $(id).addEventListener('input', function () { this.classList.remove('has-error'); say('', true); });
+    });
+
+    $('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = $('email').value.trim(), pw = $('password').value;
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        $('email').classList.add('has-error'); $('email').focus();
+        return say('Enter a valid email address, like you@example.com.', false);
+      }
+      if (pw.length < 6) {
+        $('password').classList.add('has-error'); $('password').focus();
+        return say('Your password needs at least 6 characters.', false);
+      }
+      var btn = $('loginBtn');
+      btn.disabled = true; btn.textContent = 'Logging in...';
+      // TODO: replace this timeout with a real call to your login API
+      setTimeout(function () {
+        btn.disabled = false; btn.textContent = 'Log in';
+        var next = window.BRAINY_ROUTES && window.BRAINY_ROUTES.login.afterLogin;
+        if (next) { window.brainyGo(next); }
+        else { say('Logged in (demo). Connect your login API to continue.', true); }
+      }, 900);
+    });
+
+    $('forgotBtn').addEventListener('click', function () { say('Password reset is not set up yet.', false); });
+    $('googleBtn').addEventListener('click', function () { say('Google sign-in is not set up yet.', false); });
+    $('signupBtn').addEventListener('click', function () { say('Sign-up page is not set up yet.', false); });
+  </script>
+</body>
+</html>
